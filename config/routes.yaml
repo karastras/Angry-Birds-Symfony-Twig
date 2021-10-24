@@ -1,0 +1,7 @@
+# app_index: 
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+# app_list: 
+#    path: /list
+#    controller: App\Controller\DefaultController::list

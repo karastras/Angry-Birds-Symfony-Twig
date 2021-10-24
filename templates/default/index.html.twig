@@ -1,0 +1,47 @@
+{# J'hérite de la structure HTML de base #}
+{% extends 'base.html.twig' %}
+
+{# On remplace le contenu du block 'body' de base.html.twig par le contenu html ci-dessous #}
+{% block body %}
+    <div class="text-center pt-4">
+        <h1>A Field Guide to Angry Birds</h1>
+        <h2 class="display-5">Games that lodge in the brain often have comical stars</h2>
+
+        {% if birdLast %}
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h3 class="display-4">{{birdLast.name}}</h3>
+                <img src="{{asset('assets/images/' ~ birdLast.image)  }}" alt="photo de l'oiseau {{ birdLast.name}}">
+            </div>
+        </div>
+        {% endif %}
+
+        <p>
+            <a class="btn btn-link" title="Show the PDF" href="{{ asset('assets/files/angry_birds_2015_calendar.pdf') }}">
+                Show PDF
+            </a>
+            <a class="btn btn-dark" href="{{ path('bird_download') }}">
+                Download PDF Calendar
+            </a>
+        </p>
+    </div>
+    <div class="row">
+        {% for bird in birds %}
+        <div class="col-md-3 text-center mb-2 {{ cycle(['bg-success', 'bg-info'], loop.index0) }}">
+        {#
+            La fonction asset() va créer des urls relatives au dossier public
+            assets/images/big-red.png
+
+            On peut aussi configurer le composant asset pour que les fichiers soient
+            désormais relatifs à une url (cdn)
+            https://cdn.oclock.io/assets/images/big-red.png        
+        #}
+            <img src="{{asset('assets/images/' ~ bird.image)  }}" alt="photo de l'oiseau {{ bird.name}}">
+            <p>
+                <a href="{{ path('bird_show', {'id':loop.index0}) }}">{{ bird.name }}</a>
+            </p>
+    </div>
+    {% endfor %}
+        </div>
+{% endblock %}
+

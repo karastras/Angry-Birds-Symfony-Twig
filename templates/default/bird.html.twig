@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if bird %}
+        {{bird.name}}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% if bird %}
+        <div class="text-center">
+            <h2>{{bird.name}}</h2>
+                <img src="{{asset('assets/images/' ~ bird.image)  }}" alt="photo de l'oiseau {{ bird.name}}">
+                <p>
+                    {{ bird.description }}
+                </p>
+                <hr />
+                <p>
+                    <a href="{{ path('bird_index') }}">Retour à la liste</a>
+                </p>
+        </div>
+    {% endif %}
+{% endblock %}
